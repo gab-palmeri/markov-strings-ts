@@ -1,0 +1,20 @@
+{
+  "name": "markov-strings-ts",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gab-palmeri/markov-strings-ts"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "typescript": "^4.5.4",
+    "@types/node": "^17.0.0"
+  }
+}
