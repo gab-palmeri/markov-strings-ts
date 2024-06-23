@@ -10,4 +10,4 @@ class Pair {
 	}
 }
 
-export { Pair }
+export { Pair };

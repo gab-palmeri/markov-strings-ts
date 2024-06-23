@@ -14,7 +14,7 @@ interface MarkovChainInput {
 class MarkovChain {
 	order: number;
 	statePool: StatePool;
-	frequencyMat: FrequencyMat
+	frequencyMat: FrequencyMat;
 	
 	constructor(order: number) {
 		this.order = order;
@@ -43,16 +43,12 @@ class MarkovChain {
 
 	public generate(): string {
 		const order = this.order;
-	
-		//console.log("abbiamo un ordine " + order);
-	
+		
 		const tokens: string[] = [];
 		for (let i = 0; i < order; i++) {
 			tokens.push(StartToken);
 		}
-	
-		//console.log(tokens);
-	
+		
 		while (tokens[tokens.length - 1] !== EndToken) {
 			const next = this.generateFromNGram(new NGram(tokens.slice(-order)));
 			if (next) {
@@ -71,17 +67,16 @@ class MarkovChain {
 	
 
 	public toJSON(): object {
-		console.log("ordine" + this.order);
 		return {
 			"order": this.order,
 			"statePool": this.statePool.toJSON(),
 			"frequencyMat": this.frequencyMat.toJSON()
-		}
+		};
 	}
 
 	public static fromJSON(jsonModel: MarkovChainInput): MarkovChain {
 
-		let mc = new MarkovChain(jsonModel.order);
+		const mc = new MarkovChain(jsonModel.order);
 		mc.statePool = StatePool.fromJSON(jsonModel.statePool);
 		mc.frequencyMat = FrequencyMat.fromJSON(jsonModel.frequencyMat);
 		return mc;

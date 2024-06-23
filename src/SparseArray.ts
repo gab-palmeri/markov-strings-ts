@@ -24,8 +24,8 @@ class SparseArray {
 		return Array.from(this.array.keys()).sort((a, b) => a - b);
 	}
 	
-	toJSON(): any {
-		const arrayObject: any = {};
+	toJSON(): object {
+		const arrayObject: { [key: string]: number } = {};
 		this.array.forEach((value, key) => {
 			arrayObject[key] = value;
 		});
@@ -45,4 +45,4 @@ class SparseArray {
 	
 }
 
-export { SparseArray }
+export { SparseArray };

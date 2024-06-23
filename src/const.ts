@@ -1,4 +1,4 @@
 const StartToken = "^";
 const EndToken = "$";
 
-export { StartToken, EndToken }
+export { StartToken, EndToken };

@@ -17,30 +17,33 @@ class FrequencyMat {
     }
 
     public incrementTransitionProbability(state: number, transition: number) {
-        this.frequencyMat.get(state)!.increment(transition)
+        this.frequencyMat.get(state)?.increment(transition);
     }
 
     public selectNextToken(state: number): number | undefined {
-        const arr = this.frequencyMat.get(state)!;
-		let sum = arr.sum();
-		let randN = Math.floor(Math.random() * sum);
-		
-		for (const key of arr.orderedKeys()) {
-			const freq = arr.get(key);
-			randN -= freq;
-			if (randN < 0) {
-				return key;
-			}
-		}
+        const arr = this.frequencyMat.get(state);
+
+        if (arr) {
+            const sum = arr.sum();
+            let randN = Math.floor(Math.random() * sum);
+            
+            for (const key of arr.orderedKeys()) {
+                const freq = arr.get(key);
+                randN -= freq;
+                if (randN < 0) {
+                    return key;
+                }
+            }
+        }
     }
 
     public toJSON(): object {
-
-        const obj: any = {};
-		this.frequencyMat.forEach((sparseArray, key) => {
-			obj[key] = sparseArray.toJSON();
-		});
-
+    
+        const obj: { [key: number]: object } = {};
+        this.frequencyMat.forEach((sparseArray, key) => {
+            obj[key] = sparseArray.toJSON();
+        });
+    
         return obj;
     }
 
@@ -58,4 +61,4 @@ class FrequencyMat {
 
 }
 
-export { FrequencyMat }
+export { FrequencyMat };

@@ -10,4 +10,4 @@ class NGram {
 	}
 }
 
-export { NGram }
+export { NGram };
