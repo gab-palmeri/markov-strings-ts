@@ -23,6 +23,18 @@ class MarkovChain {
 	}
 	
 	public add(input: string[]): void {
+
+		//for each string separate punctuation (only !?.",) and words, then convert to lowercase
+		const result: string[] = [];
+		const regex = /[\w']+|[!?.",]/g;
+		
+		for (const str of input) {
+			const parts = str.match(regex) || [];
+			parts.forEach(part => {
+				result.push(part.toLowerCase());
+			});
+		}
+
 		const startTokens = Array(this.order).fill(StartToken);
 		const endTokens = Array(this.order).fill(EndToken);
 		const tokens = [...startTokens, ...input, ...endTokens];
