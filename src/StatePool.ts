@@ -9,13 +9,13 @@ class StatePool {
 		this.counter = 0;
 	}
 	
-	add(str: string): number {
+	add(str: string): number | undefined {
 		if (!this.stringMap.has(str)) {
 			this.stringMap.set(str, this.counter);
 			this.intMap.set(this.counter, str);
 			this.counter++;
 		}
-		return this.stringMap.get(str)!;
+		return this.stringMap.get(str);
 	}
 	
 	getString(key: number): string | undefined {
@@ -23,11 +23,12 @@ class StatePool {
 	}
 	
 	getInt(str: string): number | undefined {
+
 		return this.stringMap.get(str);
 	}
 	
-	toJSON(): any {
-		let spoolMap: any = {};
+	toJSON(): object {
+		const spoolMap: { [key: string]: number } = {};
 		this.stringMap.forEach((value, key) => {
 			spoolMap[key] = value;
 		});
@@ -36,7 +37,7 @@ class StatePool {
 	}
 
 	public static fromJSON(json: object): StatePool {
-        let sp = new StatePool();
+        const sp = new StatePool();
 
         Object.entries(json).forEach(([key, value]: [string, number]) => {
             const parsedKey = isNaN(Number(key)) ? key : Number(key); // Check if key is numeric
@@ -52,4 +53,4 @@ class StatePool {
     }
 }
 
-export { StatePool }
+export { StatePool };

@@ -44,6 +44,10 @@ class MarkovChain {
 		pairs.forEach(pair => {
 			const currentIndex = this.statePool.add(pair.currentState.key());
 			const nextIndex = this.statePool.add(pair.nextState);
+
+			if(currentIndex === undefined || nextIndex === undefined) {
+				throw new Error("Failed to add state to state pool");
+			}
 			
 			if (!this.frequencyMat.hasState(currentIndex)) {
 				this.frequencyMat.initializeState(currentIndex);
