@@ -22,22 +22,24 @@ class MarkovChain {
 		this.frequencyMat = new FrequencyMat();
 	}
 	
-	public add(input: string[]): void {
+	public add(text: string): void {
+
+		const words = text.split(' ');
 
 		//for each string separate punctuation (only !?.",) and words, then convert to lowercase
-		const cleanInput: string[] = [];
+		const cleanWords: string[] = [];
 		const regex = /[\w']+|[!?.",]/g;
 		
-		for (const token of input) {
+		for (const token of words) {
 			const parts = token.match(regex) || [];
 			parts.forEach(part => {
-				cleanInput.push(part.toLowerCase());
+				cleanWords.push(part.toLowerCase());
 			});
 		}
 
 		const startTokens = Array(this.order).fill(StartToken);
 		const endTokens = Array(this.order).fill(EndToken);
-		const tokens = [...startTokens, ...cleanInput, ...endTokens];
+		const tokens = [...startTokens, ...cleanWords, ...endTokens];
 		
 		const pairs = this.makePairs(tokens);
 		
