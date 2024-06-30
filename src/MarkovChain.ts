@@ -26,9 +26,12 @@ class MarkovChain {
 
 		const words = text.split(' ');
 
-		//for each string separate punctuation (only !?.",) and words, then convert to lowercase
+		//for each string we need to check for:
+		// - urls
+		// - words
+		// - punctuation
 		const cleanWords: string[] = [];
-		const regex = /[\w']+|[!?.",]/g;
+		const regex = /(?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?::\d+)?(?:\/[^\s]*)?|localhost(?::\d+)?|(?:\d{1,3}\.){3}\d{1,3}(?::\d+)?|[\wÀ-ÖØ-öø-ÿ'-]+|[.!?,"():]/g;
 		
 		for (const token of words) {
 			const parts = token.match(regex) || [];
