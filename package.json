@@ -1,6 +1,6 @@
 {
   "name": "markovts",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "repository": {
     "type": "git",
     "url": "https://github.com/gab-palmeri/markov-strings-ts"
@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "publish": "rm -rf dist && tsc && npm publish",
+    "new-version": "rm -rf dist && tsc && npm publish"
   },
   "files": [
     "dist"
